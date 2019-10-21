@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devcon Command Reference</title>
+<!-- devonfw website stylesheet -->
+<link rel="stylesheet" type="text/css" href="/devonfw.css">
+<!-- Lunr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" integrity="sha256-M/Awbb/BYh+Rh0aGjpQid26p1b2OBsrk2k9yAvQxPV0=" crossorigin="anonymous"></script>
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/styles/googlecode.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/common.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="article">
+<div id="website-navbar" class="website-navbar">
+<ul>
+<li>
+<p><span class="image"><img alt="logo" src="/images/Logo_devonfw.svg"></span></p>
+</li>
+<li>
+<p><a href="/website/pages/resources/resources.html">RESOURCES</a></p>
+</li>
+<li>
+<p><a href="/website/pages/explore/explore.html">EXPLORE</a></p>
+</li>
+<li>
+<p><a href="/website/pages/docs/master.html">DOCS</a></p>
+</li>
+<li>
+<p><a href="/website/pages/community/community.html">COMMUNITY</a></p>
+</li>
+</ul>
+
+<form class="form-inline my-2 my-lg-0">
+  <div class="search-bar">
+    <input
+      id="search-field"
+      type="search"
+      class="form-control mr-sm-2"
+      placeholder="Search by keyword(s)..."
+      aria-label="Search"
+      style="height: auto;"/>
+    <div class="sb-res-pos px-4 z-100">
+      <div class="col rounded px-0 border bg-white hidden search-bar-results" id="search-results-box">
+      </div>
+    </div>
+  </div>
+</form>
+<a class="navbar-brand text-white mr-auto ml-3 ml-lg-0" href="https://github.com/devonfw/devonfw-official-website">
+  <img src="/images/github-mark.png" width=auto height=auto alt="">
+</a></div>
+<div id="sidebar" class="wiki-sidebar"></div>
+
+<div id="content">
+<div class="toc2">
+<div class="title">Table of Contents</div>
+<ul class="sectlevel0">
+<li><a href="#devcon-command-reference.asciidoc">Devcon Command Reference</a>
+<ul class="sectlevel1">
+<li><a href="#devcon-command-reference.asciidoc_dist">dist</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_dist-install">dist install</a></li>
+<li><a href="#devcon-command-reference.asciidoc_dist-init">dist init</a></li>
+<li><a href="#devcon-command-reference.asciidoc_dist-s2">dist s2</a></li>
+<li><a href="#devcon-command-reference.asciidoc_dist-info">dist info</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_doc">doc</a></li>
+<li><a href="#devcon-command-reference.asciidoc_github">github</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_github-devon4j">github devon4j</a></li>
+<li><a href="#devcon-command-reference.asciidoc_github-devoncode">github devoncode</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_help">help</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc__help_-example-of-usage"><em>help</em> example of usage</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_devon4j">devon4j</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_devon4j-create">devon4j create</a></li>
+<li><a href="#devcon-command-reference.asciidoc_devon4j-run">devon4j run</a></li>
+<li><a href="#devcon-command-reference.asciidoc_devon4j-build">devon4j build</a></li>
+<li><a href="#devcon-command-reference.asciidoc_devon4j-migrate">devon4j migrate</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_devon4ng">devon4ng</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_devon4ng-create">devon4ng create</a></li>
+<li><a href="#devcon-command-reference.asciidoc_devon4ng-build">devon4ng build</a></li>
+<li><a href="#devcon-command-reference.asciidoc_devon4ng-run">devon4ng run</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_project">project</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_project-create">project create</a></li>
+<li><a href="#devcon-command-reference.asciidoc_project-build">project build</a></li>
+<li><a href="#devcon-command-reference.asciidoc__project-build_-parameters"><em>project build</em> parameters</a></li>
+<li><a href="#devcon-command-reference.asciidoc_project-deploy">project deploy</a></li>
+<li><a href="#devcon-command-reference.asciidoc_project-run">project run</a></li>
+<li><a href="#devcon-command-reference.asciidoc__project-run_-requirements"><em>project run</em> requirements</a></li>
+<li><a href="#devcon-command-reference.asciidoc__project-run_-parameters"><em>project run</em> parameters</a></li>
+<li><a href="#devcon-command-reference.asciidoc__project-run_-example-of-usage"><em>project run</em> example of usage</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_sencha">sencha</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_sencha-run">sencha run</a></li>
+<li><a href="#devcon-command-reference.asciidoc_sencha-workspace">sencha workspace</a></li>
+<li><a href="#devcon-command-reference.asciidoc_sencha-copyworkspace">sencha copyworkspace</a></li>
+<li><a href="#devcon-command-reference.asciidoc_sencha-build">sencha build</a></li>
+<li><a href="#devcon-command-reference.asciidoc_sencha-create">sencha create</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_workspace">workspace</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_workspace-create">workspace create</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-reference.asciidoc_system">system</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-reference.asciidoc_system-install">system install</a></li>
+<li><a href="#devcon-command-reference.asciidoc_system-update">system update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="devcon-command-reference.asciidoc" class="sect0">Devcon Command Reference</h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="imageblock" style="text-align: center;">
+<div class="content">
+<a class="image" href="images/devconlogo_full.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devconlogo_full.png" alt="devconlogo full" width="200"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>In the introduction to Devcon we mentioned that Devcon is a tool based on modules that group commands so the different functionalities are stored in these modules that act as utilities containers.
+The current version of devcon has been released with the following modules</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>dist</p>
+</li>
+<li>
+<p>doc</p>
+</li>
+<li>
+<p>github</p>
+</li>
+<li>
+<p>help</p>
+</li>
+<li>
+<p>devon4j</p>
+</li>
+<li>
+<p>devon4ng</p>
+</li>
+<li>
+<p>project</p>
+</li>
+<li>
+<p>sencha</p>
+</li>
+<li>
+<p>system</p>
+</li>
+<li>
+<p>workspace</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>in your Devcon version more modules may have been included. You can list them using the option <code>devon -h</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_dist">dist</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>dist</em> module is responsible for the tasks related with the distribution which means all the functionalities surrounding the configuration of the Devon distribution, including the obtention of the distribution itself.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_dist-install">dist install</h3>
+<div class="paragraph">
+<p>The <em>install</em> command downloads a distribution from a Team Forge repository and after that extracts the file in a location defined by the user.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc_dist-install-requirements">dist install requirements</h4>
+<div class="paragraph">
+<p>A user with permissions to download files from Team Forge repository.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-install_-parameters"><em>dist install</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>install</em> parameter needs four parameters to work properly:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>user</strong>: a Team Forge user with permissions to download files from the repository at least.</p>
+</li>
+<li>
+<p><strong>password</strong>: the Team Forge user password.</p>
+</li>
+<li>
+<p><strong>path</strong>: the path where the distribution must be downloaded.</p>
+</li>
+<li>
+<p><strong>type</strong>: the type of distribution. The options are <em>'oaspide'</em> to download a devon4j based distribution or <em>'devondist'</em> to download a Devon based distribution.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-install_-example-of-usage"><em>dist install</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon dist install -user john -password 1234 -path D:\Temp\MyDistribution -type devondist
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+[INFO] installing distribution...
+[INFO] Downloading Devon-dist_2.0.0.7z (876,16MB). It may take a few minutes.
+[==========] 100% downloaded
+[INFO] File downloaded successfully.
+[...]
+[INFO] extracting file...
+[INFO] File successfully extracted.
+[INFO] The command INSTALL has finished successfully</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You must have in mind that this process can take a while, specially depending on your connection to the internet.</p>
+</div>
+<div class="paragraph">
+<p>After downloading and installing the distribution successfully installed. You can now follow the manual steps as described in the devonfw Guide or, alternatively, run 'devon dist init' to initialize the distribution.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_dist-init">dist init</h3>
+<div class="paragraph">
+<p>The <em>init</em> command initializes a newly downloaded distribution.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-init_-requirements"><em>dist init</em> requirements</h4>
+<div class="paragraph">
+<p>A new, not initialized distribution (running it on a configured distribution has no adverse side-effects).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-init_-parameters"><em>dist init</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>init</em> parameter needs one parameter to work properly:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: location of the Devon distribution (current dir if not given).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_dist-s2">dist s2</h3>
+<div class="paragraph">
+<p>The <em>s2</em> command has been developed to automate the configuration process to use Devon as a Shared Service. This configuration is based on launching two scripts included in the Devon distributions, the <em>s2-init.bat</em> and the <em>s2-create.bat</em>.
+The <em>*s2-init.bat*</em> is responsible for configuring the <em>settings.xml</em> file (located in the <em>conf/.m2</em> directory). Basically enables the connection of <em>Maven</em> with the <em>Artifactory</em> repository, where the Devon modules are stored, and adds the user credentials for this connection.</p>
+</div>
+<div class="paragraph">
+<p>The <em>*s2-create.bat*</em> creates a new project in the workspace of the distribution, and optionally does a checkout of a Subversion repository inside this new project. Finally the script creates a Eclipse <em>.bat</em> starter related to the new project.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-s2_-requirements"><em>dist s2</em> requirements</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>The command can be launched from any directory within a Devon distribution version 2.0.1 or higher. The Devon distribution is defined by having a <em>settings.json</em> file located in the <em>conf</em> directory. This file is a JSON object that defines parameters like the version of the distribution or the type which should be <em>devon-dist</em> as is showed below.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{"version": "2.0.1","type": "devon-dist"}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <em>Artifactory</em> user with permissions to download files from the repository.</p>
+</li>
+<li>
+<p>In case the optional checkout A Subversion user with permissions to do the checkout of the project specified in the <em>url</em> parameter.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The command will search for this file to get the root directory where the scripts are located so is necessary to have this file in its correct location.</p>
+</div>
+<div class="paragraph">
+<p>Apart from this the <em>settings.xml</em> file needs to be compatible with the Shared Services autoconfiguration script (<em>s2-init.bat</em>).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-s2_-parameters"><em>dist s2</em> parameters</h4>
+<div class="paragraph">
+<p>So the <em>s2</em> command needs six parameters to be able to complete the two phases:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>user</strong>: the userId for Artifactory provided by S2 for the project.</p>
+</li>
+<li>
+<p><strong>pass</strong>: the password for Artifactory.</p>
+</li>
+<li>
+<p><strong>engagementname</strong>: the name of the repository for the engagement.</p>
+</li>
+<li>
+<p><strong>ciaas</strong>: if the settings.xml must be configured for CIaaS user must set this as TRUE. Is an optional parameter with FALSE as default value.</p>
+</li>
+<li>
+<p><strong>projectname</strong>: the name for the new project.</p>
+</li>
+<li>
+<p><strong>svnuser</strong>: the user for the SVN.</p>
+</li>
+<li>
+<p><strong>svnpass</strong>: the password for the SVN.</p>
+</li>
+<li>
+<p><strong>svnurl</strong>: the url for the SVN provided by S2.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-s2_-example-of-usage"><em>dist s2</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the followings:</p>
+</div>
+<div class="paragraph">
+<p>If we only want to configure the <em>settigs.xml</em> file without using the svn option the simplest usage would be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces&gt;devon dist s2 -user john -pass ZMF4AgyhQ5X6Sr9Bd1ohjWcFjL -engagementname myEngagement -projectname TestProject
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+[...]
+INFO: Completed
+Eclipse preferences for workspace: "TestProject" have been created/updated
+Created eclipse-TestProject.bat
+Finished creating/updating workspace: "TestProject"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After this the <code>conf/.m2/settings.xml</code> file should have been configured and a new (and empty) <em>TestProject</em> directory must have been created in the <em>workspaces</em> directory and in the distribution root a new <em>eclipse-testproject.bat</em> script must have been created too.</p>
+</div>
+<div class="paragraph">
+<p>We also can get the same result and configure the <em>settings.xml</em> for CIaaS using the <em>ciaas</em> parameter</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces&gt;devon dist s2 -user john -pass ZMF4AgyhQ5X6Sr9Bd1ohjWcFjL -engagementname myEngagement -projectname TestProject -ciaas true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the svn option to automate the check out from the repository the usage would be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces&gt;devon dist s2 -user john -pass ZMF4AgyhQ5X6Sr9Bd1ohjWcFjL -engagementname myEngagement -projectname TestProject -svnurl https://coconet...Project/ -svnuser john_svn -svnpass 12345
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+[...]
+[INFO] The checkout has been done successfully.
+[INFO] Creating and updating workspace...
+[...]
+INFO: Completed
+Eclipse preferences for workspace: "TestProject" have been created/updated
+Created eclipse-TestProject.bat
+Finished creating/updating workspace: "TestProject"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After this the <code>conf/.m2/settings.xml</code> file should have been configured and a new <em>TestProject</em> directory must have been created in the <em>workspaces</em> directory with all the files checked out from the svn repository and in the distribution root a new <em>eclipse-testproject.bat</em> script must have been created too.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_dist-info">dist info</h3>
+<div class="paragraph">
+<p>The <em>info</em> command provides very basic information about the Devon distribution, like type, version and path.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__dist-info_-parameters"><em>dist info</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>dist info</em> command has one optional parameter:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: path to the distro. Uses current directory if not specified.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_doc">doc</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With this module we can access in a straightforward way to the documentation to get started with Devon framework. The commands of this module show information related with different components of Devon even opening in the default browser the sites related with them.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>doc devon</code>: Opens the Devon site in the default web browser.</p>
+</li>
+<li>
+<p><code>doc devonguide</code>: Opens the Devon Guide in the default web browser.</p>
+</li>
+<li>
+<p><code>doc getstarted</code>: Opens the 'Getting started' guide of Devon framework.</p>
+</li>
+<li>
+<p><code>doc links</code>: Shows a brief description of Devon framework and lists a set of links related to it like the public site, introduction videos, the Yammer group and so forth.</p>
+</li>
+<li>
+<p><code>doc devon4jguide</code>: Opens the devon4j guide.</p>
+</li>
+<li>
+<p><code>doc sencha</code>: Opens the Sencha Ext JS 6 documentation site.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_github">github</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module is implemented to facilitate getting the Github code from devon4j and Devon repositories. It has only two commands, one to get the OAPS4J code and other to get the Devon code.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_github-devon4j">github devon4j</h3>
+<div class="paragraph">
+<p>This command clones the devon4j repository to the path that the user specifies in the parameters.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__github-devon4j_-parameters"><em>github devon4j</em> parameters</h4>
+<div class="paragraph">
+<p>The devon4j command needs only one parameter:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: the location where the repository should be cloned.</p>
+</li>
+<li>
+<p><strong>proxyHost</strong>: Host parameter for optional Proxy configuration.</p>
+</li>
+<li>
+<p><strong>proxyPort</strong>: Port parameter for optional Proxy configuration.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__github-devon4j_-example-of-usage"><em>github devon4j</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\Projects\devon4j&gt;devon github devon4j</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or using the <strong>-path</strong> parameter</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon github devon4j -path C:\Projects\devon4j</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also we can define, if necessary, a proxy configuration. The following example shows how configure the connection for Capgemini&#8217;s proxy in Europe</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="bath language-bath">D:\Projects\devon4j&gt;devon github devon4j -proxyHost 1.0.5.10 -proxyPort 8080</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_github-devoncode">github devoncode</h3>
+<div class="paragraph">
+<p>This command clones the Devon repository to the path specified in the path parameter.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__github-devoncode_-requirements"><em>github devoncode</em> requirements</h4>
+<div class="paragraph">
+<p>A github user with download permissions over the Devon repository.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__github-devoncode_-parameters"><em>github devoncode</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>devoncode</em> command needs three parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: the location where the repository must be cloned.</p>
+</li>
+<li>
+<p><strong>username</strong>: the github user (with permission to download).</p>
+</li>
+<li>
+<p><strong>password</strong>: the password of the github user.</p>
+</li>
+<li>
+<p><strong>proxyHost</strong>: Host parameter for optional Proxy configuration.</p>
+</li>
+<li>
+<p><strong>proxyPort</strong>: Port parameter for optional Proxy configuration.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__github-devoncode_-example-of-usage"><em>github devoncode</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the followingdevon</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon github devoncode -path C:\Projects\devon -user John_g -pass 12345</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also we can define, if necessary, a proxy configuration. The following example shows how configure the connection for Capgemini&#8217;s proxy in Europe</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="bath language-bath">D:\&gt;devon github devoncode -path C:\Projects\devon -user John_g -pass 12345 -proxyHost 1.0.5.10 -proxyPort 8080</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_help">help</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The help module is responsible for showing the help info to facilitate the user the knowledge to use the tool. It has only one command, the <em>guide</em> command, that doesn&#8217;t need any parameter and that basically prints a summary of the devcon general usage with a list of the global options and a list with the available modules</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc__help_-example-of-usage"><em>help</em> example of usage</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon help guide
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+usage: devon &lt;&lt;module&gt;&gt; &lt;&lt;command&gt;&gt; [parameters...]
+Devcon is a command line tool that provides many automated tasks around
+the full life-cycle of Devon applications.
+ -h,--help        show help info for each module/command
+ -v,--version     show devcon version
+List of available modules:
+&gt; help: This module shows help info about devcon
+&gt; sencha: Sencha related commands
+&gt; dist: Module with general tasks related to the distribution itself
+&gt; doc: Module with tasks related with obtaining specific documentation
+&gt; github: Module to create a new workspace with all default configuration
+&gt; workspace: Module to create a new workspace with all default configuration</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have follow this guide you can realize that the result is the same that is shown with other options as <code><code>devon</code></code> or <code><code>devon -h</code></code>. This is because these options internally are using this module <em>help</em>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_devon4j">devon4j</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module groups all the devcon functionalities related to the server applications like creating, running and deploying server applications based on the devon4j project.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4j-create">devon4j create</h3>
+<div class="paragraph">
+<p>This command creates a new server project based on the devon4j archetype.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-create_-requirements"><em>devon4j create</em> requirements</h4>
+<div class="paragraph">
+<p>This command needs to be launched from within (or pointing to) a devonfw distribution.</p>
+</div>
+<div class="paragraph">
+<p>In a second term internally this command uses the <em>Maven</em> plugin included in the devonfw distributions so in order to be able to use this plugin we should launch this command from a devonfw command line (use the <em>console.bat</em> included in the devonfw distributions).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-create_-parameters"><em>devon4j create</em> parameters</h4>
+<div class="paragraph">
+<p>This command uses five parameters (four of them mandatory).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>servername</strong>: the name for the new server project.</p>
+</li>
+<li>
+<p><strong>serverpath</strong>: the location for the new server project. Is an optional parameter, if the user does not provide it devcon will use the current directory in its place.</p>
+</li>
+<li>
+<p><strong>packagename</strong>: the name for the project package.</p>
+</li>
+<li>
+<p><strong>groupid</strong>: the groupId for the project.</p>
+</li>
+<li>
+<p><strong>version</strong>: the version for the project.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-create_-example-of-usage"><em>devon4j create</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist&gt;devon devon4j create -servername MyNewProject -packagename io.devon.application.MyNewProject -groupid io.devon.application -version 1.0-SNAPSHOT
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+[INFO] Scanning for projects...
+[...]
+[INFO] --------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] --------------------------------------
+[INFO] Total time: 7.203 s
+[INFO] Finished at: 2016-07-14T13:00:17+01:00
+[INFO] Final Memory: 10M/42M
+[INFO] --------------------------------------
+D:\&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or using the optional <em>serverpath</em> parameter to define the location for the project</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon devon4j create -servername MyNewProject -serverpath D:\devon-dist\ -packagename io.devon.application.MyNewProject -groupid io.devon.application -version 1.0-SNAPSHOT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that we should have a new <em>MyNewProject</em> project created in the <em>devon-dist</em> directory.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4j-run">devon4j run</h3>
+<div class="paragraph">
+<p>With this command the user can run a server project application from the embedded tomcat server.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-run_-requirements"><em>devon4j run</em> requirements</h4>
+<div class="paragraph">
+<p>The command can be launched within a Devon distribution version 2.0.1 or higher. Also verify that your <em>devon4j</em> application has the devon.json file well configured.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-run_-parameters"><em>devon4j run</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>run</em> command handles two parameters</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: to indicate the location of the core project of the server app. Is an optional parameter and if not provided by the user devcon will take as the path the directory from which the command has been launched.</p>
+</li>
+<li>
+<p><strong>port</strong>: the port from which the app should be accessible.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-run_-example-of-usage"><em>devon4j run</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\MyApp\core&gt;devon devon4j run -port 8081
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+Application started
+
+[...]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.3.3.RELEASE)
+
+2016-07-01 11:13:59.006  INFO 6116 --- [           main] i.d.application.MyAp
+p.SpringBootApp   : Starting SpringBootApp on LES002610 with PID 6116 (D:\devon-
+alpha\workspaces\MyApp\core\target\classes started by pparrado in D:\devon-al
+pha\workspaces\MyApp\core)
+
+[...]
+
+2016-07-01 11:14:18.297  INFO 6116 --- [           main] i.d.application.MyAp
+p.SpringBootApp   : Started SpringBootApp in 19.698 seconds (JVM running for 35.
+789)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or providing the optional <em>path</em> parameter</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon devon4j run -port 8081 -path D:\devon-dist\workspaces\MyApp\core</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4j-build">devon4j build</h3>
+<div class="paragraph">
+<p>With this command the user can build a server project, is the equivalent to the <code>mvn clean install</code> command</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-build_-requirements"><em>devon4j build</em> requirements</h4>
+<div class="paragraph">
+<p>In order to work properly the command must be launched from within (or pointing to) a devon4j project directory (the devon4j project type is defined in a <em>devon.json</em> file with parameter 'type' set to 'devon4j').</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-build_-parameters"><em>devon4j build</em> parameters</h4>
+<div class="paragraph">
+<p>This command only uses one parameter</p>
+</div>
+<div class="paragraph">
+<p>-<strong>path</strong>: the location of the server project. This is an optional parameter and if the user does not provide it devcon will use in its place the current directory from which the command has been launched.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-build_-example-of-usage"><em>devon4j build</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\MyApp&gt;devon devon4j build
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+projectInfo read...
+path D:\devon-dist\workspaces\MyApp project type devon4j
+
+[...]
+
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO]
+[INFO] MyApp .............................................. SUCCESS [  0.301 s]
+[INFO] MyApp-core ......................................... SUCCESS [ 12.431 s]
+[INFO] MyApp-server ....................................... SUCCESS [  3.699 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 16.712 s
+[INFO] Finished at: 2016-07-15T11:44:00+01:00
+[INFO] Final Memory: 31M/76M
+[INFO] ------------------------------------------------------------------------
+D:\devon-dist\workspaces\MyApp&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or using the optional parameter <em>path</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon devon4j build -path D:\devon-dist\workspaces\MyApp</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4j-migrate">devon4j migrate</h3>
+<div class="paragraph">
+<p>With this command the user can update server project to the latest version</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-migrate_-requirements"><em>devon4j migrate</em> requirements</h4>
+<div class="paragraph">
+<p>The migrate command need only the Project that&#8217;s needs to migrate to latest version of devon4j</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-migrate_-parameters"><em>devon4j migrate</em> parameters</h4>
+<div class="paragraph">
+<p>This command only uses one parameter</p>
+</div>
+<div class="paragraph">
+<p>-<strong>projectPath</strong>: the location of the server project that&#8217;s needs to be updated.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4j-migrate_-example-of-usage"><em>devon4j migrate</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\MyApp&gt;devon devon4j migrate D:\Devon-dist_2.4.0\testproj
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+***********************************************************
+Migrating from version oasp4j:2.6.0 to oasp4j:2.6.1 ...
+***********************************************************
+Migrating file: D:\Devon-dist_2.4.0\testproj\pom.xml
+***********************************************************
+Migrating from version oasp4j:2.6.1 to oasp4j:3.0.0 ...
+***********************************************************
+Migrating file: D:\Devon-dist_2.4.0\testproj\core\pom.xml
+[......
+.........]
+Migrating file: D:\Devon-dist_2.4.0\testproj\src\main\java\com\company\SpringBootBatchApp.java
+Migrating file: D:\Devon-dist_2.4.0\testproj\src\test\java\com\company\general\batch\base\test\SpringBatchIntegrationTest.java
+***********************************************************
+Successfully applied 3 migrations to migrate project from version oasp4j:2.6.0 to devon4j:3.0.0.
+***********************************************************</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After successful upgrade of the project, below are the manual steps that are needed to perform</p>
+</div>
+<div class="paragraph">
+<p>Add the following in class WebSecurityBeansConfig</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+Add the below method
+
+ @Bean
+  public PasswordEncoder passwordEncoder() {
+
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the following in class BaseWebSecurityConfig</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Inject
+private PasswordEncoder passwordEncoder;
+
+In method configureGlobal update below
+
+auth.inMemoryAuthentication().withUser("waiter").password(this.passwordEncoder.encode("waiter")).roles("Waiter")
+        .and().withUser("cook").password(this.passwordEncoder.encode("cook")).roles("Cook").and().withUser("barkeeper")
+        .password(this.passwordEncoder.encode("barkeeper")).roles("Barkeeper").and().withUser("chief")
+        .password(this.passwordEncoder.encode("chief")).roles("Chief");</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_devon4ng">devon4ng</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The devon4ng module is responsible for automating the tasks related to the client projects based on Angular.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4ng-create">devon4ng create</h3>
+<div class="paragraph">
+<p>With this command the user can create a basic devon4ng app.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-create_-requirements"><em>devon4ng create</em> requirements</h4>
+<div class="paragraph">
+<p>This command must be used within a devonfw distribution with version 2.0.0 or higher. You can check your distribution&#8217;s version looking at the conf/settings.json file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-create_-parameters"><em>devon4ng create</em> parameters</h4>
+<div class="paragraph">
+<p>This command accepts two parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>clientname</strong>: the name for the application.</p>
+</li>
+<li>
+<p><strong>clientpath</strong>: the location for the new application. Is an optional parameter and if not provided by the user devcon will take as the path the directory from which the command has been launched.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-create_-example-of-usage"><em>devon4ng create</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces&gt;devon devon4ng create -clientname MyDevon4ngApp
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+Creating project MyDevon4ngApp...
+installing ng
+  create .editorconfig
+  create README.md
+  create src\app\app.component.css
+  [...]
+  create tslint.json
+Installing packages for tooling via npm.
+Installed packages for tooling via npm.
+Project 'MyDevon4ngApp' successfully created.
+Adding devon.json file...
+Project build successfully
+
+D:\devon-dist\workspaces&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If everything goes right a new directory <em>MyDevon4ngApp</em> must have been created containing the basic structure of an <em>devon4ng</em> app.</p>
+</div>
+<div class="paragraph">
+<p>The user can also use the next command <em>devon4ng build</em> to do that last operation.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4ng-build">devon4ng build</h3>
+<div class="paragraph">
+<p>With this command the user can resolve the dependencies of an <em>devon4ng</em> app. The <em>devon4ng build</em> command is the equivalent to the <code>ng build</code> command.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-build_-parameters"><em>devon4ng build</em> parameters</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: The location of the <em>devon4ng</em> app. Is an optional parameter and if not provided devcon will use the current directory from which the command has been launched instead.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-build_-example-of-usage"><em>devon4ng build</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\MyDevon4ngApp&gt;devon devon4ng build
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+Building project...
+Hash: 936deb00dfd88c0d9e56
+Hash: 936deb00dfd88c0d9e56
+Time: 12735ms
+Time: 12735ms
+chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 177 kB {4} [initial] [rendered]
+[...]
+chunk    {4} inline.bundle.js, inline.bundle.js.map (inline) 0 bytes [entry] [rendered]
+Project build successfully</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or using the optional parameter <em>path</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist&gt;devon devon4ng build -path D:\devon-dist\workspaces\MyDevon4ngApp</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_devon4ng-run">devon4ng run</h3>
+<div class="paragraph">
+<p>In order to launch the <em>devon4ng</em> apps devcon provides this <em>run</em> command that can be launched even without parameters.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-run_-parameters"><em>devon4ng run</em> parameters</h4>
+<div class="paragraph">
+<p>The only parameter needed is the <em>clientpath</em> that points to the client app. This is an optional parameter and if not provided devcon will use by default the directory from within the command is launched.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__devon4ng-run_-example-of-usage"><em>devon4ng run</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\MyDevon4ngApp&gt;devon devon4ng run
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+Project starting
+** NG Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200 **
+** NG Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200 **
+Hash: 7f1a11f3e039fd0028ac
+Hash: 7f1a11f3e039fd0028ac
+Time: 14333ms
+Time: 14333ms
+chunk    {0} polyfills.bundle.js, polyfills.bundle.js.map (polyfills) 177 kB {4} [initial]
+[...]
+chunk    {4} inline.bundle.js, inline.bundle.js.map (inline) 0 bytes [entry] [rendered]
+webpack: Compiled successfully.
+webpack: Compiled successfully.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or using the optional parameter <em>clientpath</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist&gt;devon devon4ng run -clientpath D:\devon-dist\workspaces\MyDevon4ngApp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In both cases, after launching the command, the app should be available through a web browser in url <code><a href="http://localhost:4200" class="bare">http://localhost:4200</a></code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_project">project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>project</em> module groups the funcionalities related to the combined server + client projects.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_project-create">project create</h3>
+<div class="paragraph">
+<p>With this command the user can automate the creation of a combined server and client project (Sencha or devon4ng).</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-create_-requirements"><em>project create</em> requirements</h4>
+<div class="paragraph">
+<p>If you want to use a Sencha app as client you will need a github user with permissions to download the <em>devon4sencha</em> repository.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-create_-parameters"><em>project create</em> parameters</h4>
+<div class="paragraph">
+<p>Basically this command needs the same paremeters as the 'subcommands' that is using behind (<code>devon4j create</code>, <code>devon4ng create</code>, <code>sencha workspace</code> and <code>sencha create</code>)</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>combinedprojectpath</strong>: the path to locate the server and client projects. Is an optional parameter and if not provided by the user devcon will take as the path the directory from which the command has been launched.</p>
+</li>
+<li>
+<p><strong>servername</strong>, <strong>packagename</strong>, <strong>groupid</strong>, <strong>version</strong>: the parameters related to the Server application. You can get more details in the 'devon4j create' command reference in this document.</p>
+</li>
+<li>
+<p><strong>clienttype</strong>: the type for the client app, you can provide <em>devon4ng</em> for Angular based client or <em>devon4sencha</em> for Sencha based client.</p>
+</li>
+<li>
+<p><strong>clientname</strong>: the name for the client app.</p>
+</li>
+<li>
+<p><strong>clientpath</strong>: the path to locate the client app. Current directory if not provided.</p>
+</li>
+<li>
+<p><strong>createsenchaws</strong>: is an optional parameter that indicates if the Sencha workspace needs to be created (by default its value is FALSE).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-create_-example-of-usage"><em>project create</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\combined&gt;devon project create -servername myServerApp -groupid com.capgemini.devonfw -packagename com.capgemini.devonfw.myServerApp -version 1.0 -clientname myClientApp -clienttype devon4ng
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+serverpath is D:\devon-dist\workspaces\combined\.
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+
+[...]
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 6.862 s
+[INFO] Finished at: 2016-08-05T09:23:35+01:00
+[INFO] Final Memory: 10M/43M
+[INFO] ------------------------------------------------------------------------
+Adding devon.json file...
+Project Creation completed successfully
+Creating client project...
+Creating project myClientApp...
+Adding devon.json file...
+Editing java/pom.xml...
+Project created successfully. Please launch 'npm install' to resolve the project dependencies.
+Adding devon.json file to combined project...
+Combined project created successfully.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this example we have created a Server + devon4ng app in the <code>D:\devon-dist\workspaces\combined</code> directory. So within this folder we should find:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>myServerApp</em> folder with the <code>devon4j</code> app.</p>
+</li>
+<li>
+<p><em>myClientApp</em> folder with the `devon4ng`app.</p>
+</li>
+<li>
+<p>the <code>devon.json</code> file with the following configuration:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{"version": "2.0.1",
+"type":"COMBINED",
+"projects":["myServerApp", "myClientApp"]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see the 'projects' property points to the 'subprojects' created. In case we had used the <em>clientpath</em> parameter to locate it in a different place that 'project' will reflect it pointing to the client path location:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{"version": "2.0.1",
+"type":"COMBINED",
+"projects":["myServerApp", "D:\\devon-dist\\otherDirectory\\myClientApp"]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other possible usages</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>D:\devon-dist\TEST&gt;devon project create -servername sss -groupid com.cap -packagename com.cap.sss -version 1.0 -clientname ccc -clienttype devon4sencha -clientpath D:\devon-dist\TESTB</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Will create a server app (sss) in current directory and a Sencha app in the TESTB directory (that must be a Sencha workspace)</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>D:\devon-dist\TEST&gt;devon project create -servername sss -groupid com.cap -packagename com.cap.sss -version 1.0 -clientname ccc -clienttype devon4sencha -clientpath D:\devon-dist\TESTB -createsenchaws true</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Will create a server app (sss) in current directory and a Sencha workspace with a Sencha app inside in the TESTB directory.</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>D:\devon-dist\TEST&gt;devon project create -servername sss -groupid com.cap -packagename com.cap.sss -version 1.0 -clientname ccc -clienttype devon4sencha</code></p>
+<div class="literalblock">
+<div class="content">
+<pre>Will create a server app (sss) and a Sencha workspace with a Sencha app inside, all in current directory.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_project-build">project build</h3>
+<div class="paragraph">
+<p>This command will build both client and server project.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-build_-requirements"><em>project build</em> requirements</h4>
+<div class="paragraph">
+<p>In order to work properly, the command must be launched from within (or pointing to) a Devon distribution (the devon4j project type is defined in a <em>devon.json</em> file with parameter 'type' set to 'devon4j' in the server project ).
+The directory from where build command is fired should contain client and server project at same level, and directory should contain a <em>devon.json</em> which should have project type as <em>COMBINED</em>,and  client  project should contain a <em>devon.json</em> file with parameter 'type' set to  'devon4ng' or 'devon4sencha'.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc__project-build_-parameters"><em>project build</em> parameters</h3>
+<div class="paragraph">
+<p>The build command takes three parameters and two of them are mandatory.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong> : This is an optional paremaeter. It points to server project workspace and if value of this parameter not given, it takes default value as current directory.</p>
+</li>
+<li>
+<p><strong>clienttype</strong> : This parameter shows which type of client is integrated with server i.e devon4ng or sencha. Its a mandatory one.</p>
+</li>
+<li>
+<p><strong>clientpath</strong> : It should point to client directory i.e where the client code is located. Again a mandatory one.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-build_-example-of-usage"><em>project build</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon project build -path D:\FIN_IDE\devon4j-ide-all-2.0.0\samplec -clienttyp
+e devon4ng -clientpath D:\FIN_IDE\devon4j-ide-all-2.0.0\clientdoc
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+projectInfo read...
+path D:\FIN_IDE\devon4j-ide-all-2.0.0\samplecproject type devon4j
+Completed
+path D:\FIN_IDE\devon4j-ide-all-2.0.0\clientdocproject type devon4ng
+Completed</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_project-deploy">project deploy</h3>
+<div class="paragraph">
+<p>This command automates all the process described in the <a href="#Deployment on Tomcat (Client/Server)">deployment on tomcat</a> section. It creates a new tomcat server associated to the combined server + client project in the <em>software</em> directory of the distribution and launches it to make the project available in a browser.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-deploy_-requirements"><em>project deploy</em> requirements</h4>
+<div class="paragraph">
+<p>The command automates the packaging of the combined Server + Client project but the user must configure those apps to work properly so you need to varify that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The client app <em>points</em> to the server app: in Sencha projects the 'server' property of <em>app/Config.js</em> or app/ConfigDevelopment.js_ (depending of the type of build) must point to your server app. In case of devon4ng projects we will need to configure the <em>baseUrl</em> property of the&#8217;config.json' file to point to our server.</p>
+</li>
+<li>
+<p>The server redirects to the client: in the server project the file <code>&#8230;&#8203;\serverApp\server\src\main\webapp\index.jsp</code> should redirect to <code>jsclient</code> profile
+.index.jsp</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;%
+  response.sendRedirect(request.getContextPath() + "/jsclient/");
+%&gt;</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The combined project must have a <code>devon.json</code> file defining the type (that must be 'combined') and the subprojects (server and client):</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{"version": "2.0.1",
+"type":"COMBINED",
+"projects": ["D:\devon-dist\workspaces\SenchaWorkspace\myClientApp","myServerApp"]
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above that <code>devon.json</code> file defines a server app (<em>myServerApp</em>) that is located within the combined project directory (so we do not need to provide a path, only the folder name) and a client app (<em>myClientApp</em>) located in a Sencha workspace outside the combined project directory (so we need to provide the path).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Each 'subprojects' (server and client) must have its corresponding <code>devon.json</code> file well formed (the 'type' must be <em>devon4j</em> for server and for client apps <em>devon4ng</em> or <em>devon4sencha</em>).</p>
+</li>
+<li>
+<p>The command must be launched from within a valid devonfw distribution.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-deploy_-parameters"><em>project deploy</em> parameters</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>tomcatpath</strong>: the path to the tomcat folder. Devcon will look for the distribution&#8217;s Tomcat when this parameter is not provided.</p>
+</li>
+<li>
+<p><strong>clienttype</strong>: type of client either angular or Sencha (obtained from 'projects' property in devon.json when not given).</p>
+</li>
+<li>
+<p><strong>clientpath</strong>: path to client project (obtained from 'projects' property in devon.json when not given).</p>
+</li>
+<li>
+<p><strong>serverpath</strong>: path to server project (obtained from 'projects' property in devon.json when not given).</p>
+</li>
+<li>
+<p><strong>path</strong>: path for the combined project (current directory when not given).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__project-deploy_-example-of-usage"><em>project deploy</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\MyCombinedProject&gt;devon project deploy
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+[...]
+##########################################################################
+After Tomcat finishes the loading process the app should be available in:
+localhost:8080/myServerApp-server-1.0
+##########################################################################</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The process will open a new command window for the Tomcat&#8217;s launching process and finally will shows us the url where the combined app should be accesible.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+The url is formed with the name of the .war file generated when packaging the app.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If we use the optional parameter <em>path</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist&gt;devon project deploy -path D:\devon-dist\workspaces\MyCombinedProject</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_project-run">project run</h3>
+<div class="paragraph">
+<p>This command  runs the server &amp; client project(unified build) in debug mode that is separate client and spring boot server.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc__project-run_-requirements"><em>project run</em> requirements</h3>
+<div class="paragraph">
+<p>Please verify the <em>devon4j run</em> and <em>devon4ng run</em> or <em>sencha run</em> requirements.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc__project-run_-parameters"><em>project run</em> parameters</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>clienttype</strong> : This parameter shows which type of client is integrated with server i.e devon4ng or sencha and its a mandatory parameter</p>
+</li>
+<li>
+<p><strong>clienttype</strong> : the type of the client app ('devon4ng' or 'devon4sencha').</p>
+</li>
+<li>
+<p><strong>clientpath</strong> : Location of the devon4ng app.</p>
+</li>
+<li>
+<p><strong>serverport</strong> : Port to start server.</p>
+</li>
+<li>
+<p><strong>serverpath</strong> : Path to Server project Workspace (currentDir if not given).</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc__project-run_-example-of-usage"><em>project run</em> example of usage</h3>
+<div class="paragraph">
+<p>A simple example of usage for this command ( for client type devon4ng) would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon project run -clienttype devon4ng -clientpath D:\FIN_IDE\devon4j-ide-all-
+2.0.0\workspaces\main\examples\devon4ng -serverport 8080 -serverpath D:\FIN_IDE\o
+asp4j-ide-all-2.0.0\workspaces\main\code\devon4j\samples\server
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+path before modification D:\FIN_IDE\devon4j-ide-all-2.0.0\workspaces\main\code\oa
+sp4j\samples\server
+Server project path D:\FIN_IDE\devon4j-ide-all-2.0.0\workspaces\main\code\devon4j\
+samples\server
+Application started
+Starting application</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After launching the command, a browser should be opened and will show the welcome page of the devon4ng app.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_sencha">sencha</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Sencha</em> is a pure JavaScript application framework for building interactive cross platform web applications and is the view layer for web applications developed with Devon Framework. This module encapsulates the <em>Sencha Cmd</em> functionality that is a command line tool to automate tasks around <em>Sencha</em> apps.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_sencha-run">sencha run</h3>
+<div class="paragraph">
+<p>This command compiles in DEBUG mode and then runs the internal Sencha web server. Is the equivalent to the <em>Sencha Cmd</em>'s <code><code>sencha app watch</code></code> and does not need any parameter.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-run_-requirements"><em>sencha run</em> requirements</h4>
+<div class="paragraph">
+<p>We should launch the command from a Devon4Sencha project which is defined by a <em>devon.json</em> file with parameter 'type' set to 'Devon4Sencha'</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{ "version": "2.0.0",
+  "type":"Devon4Sencha"}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-run_-example-of-usage"><em>sencha run</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\devon-dist\workspaces\senchaProject&gt;devon sencha run</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_sencha-workspace">sencha workspace</h3>
+<div class="paragraph">
+<p>With this command we can generate automatically a fully functional Sencha workspace in a directory of our machine.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-workspace_-requirements"><em>sencha workspace</em> requirements</h4>
+<div class="paragraph">
+<p>We will need a Github user with permissions to clone the <em>devon4sencha</em> repository.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-workspace_-parameters"><em>sencha workspace</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>sencha workspace</em> command needs five parameters and four of them are mandatory.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>path</strong>: the location where the workspace should be created. This parameter is optional and if the user does not provide it devcon will take the current directory as the location for the Sencha workspace.</p>
+</li>
+<li>
+<p><strong>username</strong>: the github user with permission to download the <em>devon4sencha</em> repository.</p>
+</li>
+<li>
+<p><strong>password</strong>: the password of the github user.</p>
+</li>
+<li>
+<p><strong>proxyHost</strong>: Host parameter for optional Proxy configuration.</p>
+</li>
+<li>
+<p><strong>proxyPort</strong>: Port parameter for optional Proxy configuration.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-workspace_-example-of-usage"><em>sencha workspace</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon sencha workspace -path D:\MyProject -username john -password 1234
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+Cloning into 'D:\MyProject\MySenchaWorkspace'...
+Having repository: D:\MyProject\MySenchaWorkspace\.git</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So after that we will have a sencha workspace located in the <em>D:\MyProject</em> directory.</p>
+</div>
+<div class="paragraph">
+<p>Also we can define, if necessary, a proxy configuration. The following example shows how to configure the connection for Capgemini&#8217;s proxy in Europe</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon sencha workspace -path D:\MyProject -username john -password 1234 -proxyHost 1.0.5.10 -proxyPort 8080</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_sencha-copyworkspace">sencha copyworkspace</h3>
+<div class="paragraph">
+<p>With this command we can make create new Sencha workspace by making a copy from an existing Devon dist to a particular path</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-copyworkspace_-requirements"><em>sencha copyworkspace</em> requirements</h4>
+<div class="paragraph">
+<p>There should be a devonfw distribution present which included the 'workspaces\examples\devon4sencha' folder</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-copyworkspace_-parameters"><em>sencha copyworkspace</em> parameters</h4>
+<div class="paragraph">
+<p>The <em>sencha copyworkspace</em> command needs two parameters. Both are optional.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>workspace</strong>: the path to the workspace. This parameter is optional. Devcon will take the current directory if not provide and in that case it will use the name 'devon4sencha'.</p>
+</li>
+<li>
+<p><strong>distpath</strong>: the path to a devonfw Dist (Current directory if not provided)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_sencha-build">sencha build</h3>
+<div class="paragraph">
+<p>This command builds a Sencha Ext JS6 project. Is the equivalent to the <em>Sencha Cmd</em>'s <code><code>sencha app build</code></code>.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-build_-parameters"><em>sencha build</em> parameters</h4>
+<div class="paragraph">
+<p>This command only has one parameter and it is optional</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>appDir</strong>: the path to the app to be built. If the user does not provide it devcon will use the current directory as the location of the Sencha app.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-build_-example-of-usage"><em>sencha build</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\MySenchaWorkspace\MyApp&gt;devon sencha build
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+OUTPUT:Sencha Cmd v6.1.2.15
+OUTPUT:[INF] Processing Build Descriptor : classic
+[...]
+[INFO] [LOG] Sencha App Watch Started
+[INFO] [LOG]Sencha Build Successful
+D:\MySenchaWorkspace\MyApp&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And using the optional parameter <em>appDir</em> to locate the app the usage would be like the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon sencha build -appDir D:\MySenchaWorkspace\MyApp
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+OUTPUT:Sencha Cmd v6.1.2.15
+OUTPUT:[INF] Processing Build Descriptor : classic
+[...]
+[INFO] [LOG] Sencha App Watch Started
+[INFO] [LOG]Sencha Build Successful
+D:\&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_sencha-create">sencha create</h3>
+<div class="paragraph">
+<p>This command creates a new Sencha Ext JS6 app.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-create_-requirements"><em>sencha create</em> requirements</h4>
+<div class="paragraph">
+<p>The command must be launched within a Sencha workspace or pointing to a Sencha workspace using the optional parameter <em>workspacepath</em>. So in order to work properly first we will need to have a Sencha workspace ready in our local machine.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-create_-parameters"><em>sencha create</em> parameters</h4>
+<div class="paragraph">
+<p>The create parameters handles two parameters</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>appname</strong>: the name for the new app.</p>
+</li>
+<li>
+<p><strong>workspacepath</strong>: optionally the user can specify the location of the Sencha workspace. If the user does not provide it the current directory will be use as default.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__sencha-create_-example-of-usage"><em>sencha create</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\MySenchaWorkspace&gt;devon sencha create -appname MyNewApp
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+OUTPUT:Sencha Cmd v6.1.2.15
+OUTPUT:[INF] Loading framework from D:\MySenchaWorkspace\
+[...]
+[INFO] [LOG]Sencha Ext JS6 app Created
+D:\MySenchaWorkspace&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And using the optional parameter <em>workspacepath</em> to locate the Sencha workspace the command would be like the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon sencha create -appname MyNewApp -workspacepath D:\MySenchaWorkspace
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+OUTPUT:Sencha Cmd v6.1.2.15
+OUTPUT:[INF] Loading framework from D:\MySenchaWorkspace\
+[...]
+[INFO] [LOG]Sencha Ext JS6 app Created
+D:\&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that we will have a new Sencha app called <em>MyNewApp</em> in our Sencha workspace.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_workspace">workspace</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module handles all tasks related to distribution workspaces.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_workspace-create">workspace create</h3>
+<div class="paragraph">
+<p>This command automates the creation of new workspaces within the distribution with the default configuration including a new Eclipse <em>.bat</em> starter related to the new project.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc_workspace-create-parameters">workspace create parameters</h4>
+<div class="paragraph">
+<p>The create command needs two parameters:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>devonpath</strong>: the path where the devon distribution is located.</p>
+</li>
+<li>
+<p><strong>foldername</strong>: the name for the new workspace.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__workspace-create_-example-of-usage"><em>workspace create</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon workspace create -devonpath C:\MyFolder\devon-dist -foldername newproject
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+[INFO] creating workspace at path D:\devon2-alpha\workspaces\newproject
+[...]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As a result of that a new folder <em>newproject</em> with the default project configuration should be created in the <em>C:\MyFolder\devon-dist\workspaces</em> directory alongside an <em>eclipse-newproject.bat</em> starter script in the root of the distribution.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-reference.asciidoc_system">system</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This module contains system wide commands related to devcon.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_system-install">system install</h3>
+<div class="paragraph">
+<p>This command installs devcon on user&#8217;s HOME directory or at an alternative path provided by user.</p>
+</div>
+<div class="paragraph">
+<p>It should be used as a very first step to install Devcon, <a href="#Download Devcon">see more here</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">&gt; java -jar devcon.jar system install</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you are behind a proxy you must configure the connection using the optional parameters <strong>-proxyHost</strong> and <strong>-proxyPort</strong>. In following example we show how to use the <em>system install</em> command for Capgemini&#8217;s proxy in Europe</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">&gt; java -jar devcon.jar system install -proxyHost 1.0.5.10 -proxyPort 8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-reference.asciidoc_system-update">system update</h3>
+<div class="paragraph">
+<p>Launching this command the user can update the Devcon version installed to the last version available.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-reference.asciidoc__system-update_-example-of-usage"><em>system update</em> example of usage</h4>
+<div class="paragraph">
+<p>A simple example of usage for this command would be the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon system update</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As occurs with the <em>system install</em> command, if you are behind a proxy you will need to use the optional parameters <strong>-proxyHost</strong> and <strong>-proxyPort</strong> to configure the connection. The following example shows how to configure the <em>system update</em> with the Capgemini&#8217;s proxy in Europe</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">D:\&gt;devon system update -proxyHost 1.0.5.10 -proxyPort 8080</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer" class="footer">
+<div class="openblock footerLinks">
+<div class="content">
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">About</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">About Defonfw</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Content Marketing</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Features</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Customer References</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Stack technology</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">Explore</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">Getting started</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Architecture</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Resources</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Tutorials</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Videos &amp; Photos</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">Docs</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">User guide</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Releases information</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Tutorials &amp; examples</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Wiki</a></p>
+</li>
+<li>
+<p><a href="#/index.html">FAQ</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">Community</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">Events</a></p>
+</li>
+<li>
+<p><a href="#/index.html">News</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Contributors</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Yammer channel</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Wiki</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="ulist footerFooter">
+<ul>
+<li>
+<p><a href="#/index.html">Terms</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Privacy</a></p>
+</li>
+<li>
+<p><a href="#/index.html">License</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Support</a></p>
+</li>
+</ul>
+</div>
+</div>
+    <script type="module">
+      import { UtilsModule } from '/website/shared/utils.js';
+      import { HeaderModule } from '/website/components/header/header.js';
+
+      let searchData = { index: null, documents: null };
+      UtilsModule.loadIndex(searchData);
+
+      $(window).on('load', function() {
+        const queryFun = () => {
+          HeaderModule.queryFunction(searchData);
+        };
+
+        HeaderModule.searchOnClick(queryFun);
+      });
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+Last updated 2019-10-21 12:08:07 UTC
+</div>
+</div>
+</body>
+</html>

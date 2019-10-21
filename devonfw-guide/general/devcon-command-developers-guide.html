@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devcon Command Developer&#8217;s guide</title>
+<!-- devonfw website stylesheet -->
+<link rel="stylesheet" type="text/css" href="/devonfw.css">
+<!-- Lunr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js" integrity="sha256-M/Awbb/BYh+Rh0aGjpQid26p1b2OBsrk2k9yAvQxPV0=" crossorigin="anonymous"></script>
+<!-- JQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/styles/googlecode.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/lang/common.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="article">
+<div id="website-navbar" class="website-navbar">
+<ul>
+<li>
+<p><span class="image"><img alt="logo" src="/images/Logo_devonfw.svg"></span></p>
+</li>
+<li>
+<p><a href="/website/pages/resources/resources.html">RESOURCES</a></p>
+</li>
+<li>
+<p><a href="/website/pages/explore/explore.html">EXPLORE</a></p>
+</li>
+<li>
+<p><a href="/website/pages/docs/master.html">DOCS</a></p>
+</li>
+<li>
+<p><a href="/website/pages/community/community.html">COMMUNITY</a></p>
+</li>
+</ul>
+
+<form class="form-inline my-2 my-lg-0">
+  <div class="search-bar">
+    <input
+      id="search-field"
+      type="search"
+      class="form-control mr-sm-2"
+      placeholder="Search by keyword(s)..."
+      aria-label="Search"
+      style="height: auto;"/>
+    <div class="sb-res-pos px-4 z-100">
+      <div class="col rounded px-0 border bg-white hidden search-bar-results" id="search-results-box">
+      </div>
+    </div>
+  </div>
+</form>
+<a class="navbar-brand text-white mr-auto ml-3 ml-lg-0" href="https://github.com/devonfw/devonfw-official-website">
+  <img src="/images/github-mark.png" width=auto height=auto alt="">
+</a></div>
+<div id="sidebar" class="wiki-sidebar"></div>
+
+<div id="content">
+<div class="toc2">
+<div class="title">Table of Contents</div>
+<ul class="sectlevel0">
+<li><a href="#devcon-command-developers-guide.asciidoc">Devcon Command Developer&#8217;s guide</a>
+<ul class="sectlevel1">
+<li><a href="#devcon-command-developers-guide.asciidoc_introduction">Introduction</a></li>
+<li><a href="#devcon-command-developers-guide.asciidoc_creating-your-own-devcon-modules">Creating your own Devcon modules</a>
+<ul class="sectlevel2">
+<li><a href="#devcon-command-developers-guide.asciidoc_elements-and-their-keywords">Elements and their keywords</a></li>
+<li><a href="#devcon-command-developers-guide.asciidoc_creating-a-java-module">Creating a java module</a></li>
+<li><a href="#devcon-command-developers-guide.asciidoc_javascript-modules">Javascript modules</a></li>
+</ul>
+</li>
+<li><a href="#devcon-command-developers-guide.asciidoc_conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="devcon-command-developers-guide.asciidoc" class="sect0">Devcon Command Developer&#8217;s guide</h1>
+<div class="sect1">
+<h2 id="devcon-command-developers-guide.asciidoc_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#Devcon User Guide">Devcon</a> is a cross-platform command line and GUI tool written in Java that provides many automated tasks around the full life-cycle of devonfw applications.</p>
+</div>
+<div class="paragraph">
+<p>The structure of Devcon is formed by two main elements: <em>modules</em> and <em>commands</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-structure.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-structure.png" alt="devcon structure" width="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>where each module represents an area of Devon and groups commands that are related to some specific task of that area.</p>
+</div>
+<div class="paragraph">
+<p>There is also a third element with a main spot in Devcon, the <em>parameters</em>, we will see them later.</p>
+</div>
+<div class="paragraph">
+<p>After <a href="#Download Devcon">installing Devcon</a> you can see the modules and commands available out of the box opening a command line and using the command <code>devon -g</code> to launch the Devcon&#8217;s graphic user interface.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Using the command line and the command <code>devon -h</code> (even using only the keyword <code>devon</code> or <code>devcon</code>) and <code>devon &lt;module&gt; -h</code> will show the equivalent information.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-structure-gui.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-structure-gui.png" alt="devcon structure gui" width="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>The available modules appear in the window bar and clicking over each module a drop down menu shows the list of commands grouped under a particular module.</p>
+</div>
+<div class="paragraph">
+<p>As showed above the module <em>devon4j</em> has four commands related to the <em>devon4j</em> projects: <em>create</em>, <em>build</em>, <em>run</em> and <em>deploy</em>. Each command takes care of an specific task within the context of that particular module.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-developers-guide.asciidoc_creating-your-own-devcon-modules">Creating your own Devcon modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Devcon has been designed to be easily extended with new custom functionalities. Thanks to its structure based on <em>modules</em> and <em>commands</em> (and <em>parameters</em>) the users can cover new tasks simply including new modules and commands to the tool.</p>
+</div>
+<div class="paragraph">
+<p>We will be able to do that in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adding a new Java module in the <em>core</em> of Devcon.</p>
+</li>
+<li>
+<p>Adding an external module written in Javascipt.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s see the basic elements to have in mind before starting with the addition of new modules.</p>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-developers-guide.asciidoc_elements-and-their-keywords">Elements and their keywords</h3>
+<div class="paragraph">
+<p>Each main element of Devcon needs to be <em>registered</em> to become accessible, to achieve that we annotate each element with a specific <em>keyword</em> that will tell Devcon, during the launching process, which elements are available as modules and commands.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_module-registry">module registry</h4>
+<div class="paragraph">
+<p>Internally the modules are registered in Devcon&#8217;s context using the <em>@CmdModuleRegistry</em> annotation and providing some <em>metadata</em> (like <em>name</em>, <em>description</em>, etc.) to define the basic details of the module.</p>
+</div>
+<div class="paragraph">
+<p>In de Javascript approach this annotation will be replaced by a <em>json</em> file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_command-registry">command registry</h4>
+<div class="paragraph">
+<p>In the same way, the commands in Devcon are registered using the <em>@Command</em> annotation, that also allows to add <em>metadata</em> (<em>name</em>, <em>description</em>, etc.) to provide more information.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_parameter-registry">parameter registry</h4>
+<div class="paragraph">
+<p>In most cases the commands will need parameters to work with. The <em>@Parameters</em> and <em>@Parameter</em> annotations allow to register those in Devcon. The <em>@Parameter</em> annotation also allows to define the basic info of each parameter (<em>name</em>, <em>description</em>, etc.).</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-developers-guide.asciidoc_creating-a-java-module">Creating a java module</h3>
+<div class="paragraph">
+<p>If you are not interested in create <em>core</em> modules and want to focus on external Javascript modules skip this section and go direcly to <a href="#devcon-command-developers-guide.asciidoc_javascript-modules">Javascript modules</a> part.</p>
+</div>
+<div class="paragraph">
+<p>So once we have the basic definition of the Devcon&#8217;s elements and we know how to register them, let&#8217;s see how to add a new module in Devcon&#8217;s <em>core</em> using Java.</p>
+</div>
+<div class="paragraph">
+<p>In this example we are going to create a new module called <em>file</em> in order to manage files. As a second stage we are going to add an <em>extract</em> command to extract zip files. To avoid the tricky details we are going to reuse the <em>unzip</em> functionality already implemented in the Devcon&#8217;s utilities.</p>
+</div>
+<div class="paragraph">
+<p>1 - Get the last Devcon release from <a href="https://github.com/devonfw/devcon/releases" class="bare">https://github.com/devonfw/devcon/releases</a></p>
+</div>
+<div class="paragraph">
+<p>2 - Unzip it and <em>Import</em> the Devcon project using Eclipse.</p>
+</div>
+<div class="paragraph">
+<p>3 - In <code>src/main/java/com.devonfw.devcon/modules</code> folder create a new package <em>file</em> for the new module and inside it add a new <em>File</em> class.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_module-annotations">Module annotations</h4>
+<div class="paragraph">
+<p>To define the class as a Devcon module we must provide:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>@CmdModuleRegistry</strong> annotation with the attributes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>name</em>: for the module name.</p>
+</li>
+<li>
+<p><em>description</em>: for the module description that will be shown to the users.</p>
+</li>
+<li>
+<p><em>visible</em>: if not provided its default value is <em>true</em>. Allows to hide modules during develop time.</p>
+</li>
+<li>
+<p><em>sort</em>: to sort modules, if not provided the default value will be <em>-1</em>. If sort &gt;=0, it will be sorted by descending value. Modules which do not have any value for sort attribute or which have value &lt;1 will be omitted from numeric sort and will be sorted alphabetically. This modules will be appended to the modules which are sorted numerically.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>extend the <em>AbstractCommandModule</em> to have access to all internal features already implemented for the modules (access to output and input methods, get metadata from the project <em>devon.json</em> file, get the directory from which the command has been launched, get the root of the distribution and so foth).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Finally we will have something like</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">@CmdModuleRegistry(name = "file", description = "custom devcon module", sort = -1)
+public class File extends AbstractCommandModule {
+
+...
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_command-annotations">Command annotations</h4>
+<div class="paragraph">
+<p>Now is time to define the command <em>extract</em> of our new module <em>file</em>. In this case we will need to provide:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>@Command</strong> annotation with attributes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>name</em>: for the command name.</p>
+</li>
+<li>
+<p><em>description</em>: for the command description that will be shown to the users.</p>
+</li>
+<li>
+<p><em>context</em>: the context in which the command is expected to be launched regarding a project. E.g. think in the <em>devon4j run</em> command. In this case the <em>run</em> command of the <em>devon4j</em> module needs to be launched within the context of an <em>devon4j</em> project. We will define that context using this <em>context</em> attribute. The options are:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>NONE</em>: if the command doesn&#8217;t need to be launched within a project context.</p>
+</li>
+<li>
+<p><em>PROJECT</em>: if the command is expected to be launched within a project (devon4j, devon4js or Sencha). In theese cases this context definition will automatically provide a default <em>path</em> parameter to the command parameters alongside some extra project info (see the <em>devon4j run</em> implementation.).</p>
+</li>
+<li>
+<p><em>COMBINEDPROJECT</em>: if the command needs to be launched within a combined (server &amp; client) project.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><em>proxyParams</em>: in case you need to configure a proxy this attribute will inject automatically a <em>host</em> and <em>port</em> parameters as part of the parameters of your command.</p>
+</li>
+<li>
+<p><em>sort</em>: see the <em>sort</em> attribute in the previous section.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_parameter-annotations">Parameter annotations</h4>
+<div class="paragraph">
+<p>To define the parameters of our <em>extract</em> method we must use the following annotations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>@Parameters</strong> annotation to group the command parameters</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>value</em>: an array with the parameters</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>@Parameter</strong> annotation for each parameter expected.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>name</em>: the name for the parameter.</p>
+</li>
+<li>
+<p><em>description</em>: the description of the parameter to be shown to the users.</p>
+</li>
+<li>
+<p><em>optional</em>: if the parameter is mandatory or not, by default this attribute has as value <em>false</em>, so by default a parameter will be mandatory.</p>
+</li>
+<li>
+<p><em>sort</em>: see the <em>sort</em> attribute in the previous section.</p>
+</li>
+<li>
+<p><em>inputType</em>: the type of field related to the parameter to be shown in the graphic user interface of Devcon.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>GENERIC</em> for text field parameters.</p>
+</li>
+<li>
+<p><em>PATH</em> if you want to bind the parameter value to a <em>directory window</em>.</p>
+</li>
+<li>
+<p><em>PASSWORD</em> to show a password field.</p>
+</li>
+<li>
+<p><em>LIST</em> to show a dropdown list with predefined options as value for a parameter.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s imagine that in our <em>extract</em> example we are going to define two parameters <em>filepath</em> and <em>targetpath</em> (the location of the zip file and the path to the folder to store the extracted files).
+As our command will extract a zip file we don&#8217;t need a particular project context so we will use the <em>ContextType.NONE</em>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, importing the package <code>com.devonfw.devcon.common.utils.Extractor</code> we will have access to the <em>unZip</em> functionality. Also, thanks to the <em>AbstractCommandModule</em> class that we have extended we have access to an output object to show info/error messages to the users.</p>
+</div>
+<div class="paragraph">
+<p>So our example will look like</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="java language-java">@CmdModuleRegistry(name = "file", description = "custom devcon module", sort = -1)
+public class File extends AbstractCommandModule {
+
+  @Command(name = "extract", description = "This command extracts a zip file.", context = ContextType.NONE)
+  @Parameters(values = {
+  @Parameter(name = "filepath", description = "path to the file to be extracted", inputType = @InputType(name = InputTypeNames.GENERIC)),
+  @Parameter(name = "targetpath", description = "path to the folder to locate the extracted files", inputType = @InputType(name = InputTypeNames.PATH)) })
+  public void extract(String filepath, String targetpath){
+    getOutput().showMessage("Extracting...");
+    try {
+      Extractor.unZip(filepath, targetpath);
+      getOutput().showMessage("Done!");
+    } catch (Exception e) {
+      getOutput().showError("Ups something went wrong.");
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_generate-the-jar">Generate the jar</h4>
+<div class="paragraph">
+<p>Finally, we need to generate a new devcon.jar file containing our new module. To do so, in Eclipse, with right click over the <em>devcon</em> project in the <em>Project Explorer</em> panel:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Export</em> &gt; <em>Runnable JAR file</em> &gt; <em>Next</em></p>
+</li>
+<li>
+<p>Runnable JAR File Export window:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Launch configuration: Devcon (if you don`t have any option for that paramter try to launch once the Devcon.java class with right click and <em>Run as</em> &gt; <em>Java Application</em> and start again the JAR generation).</p>
+</li>
+<li>
+<p>Export destination: select a location for the jar.</p>
+</li>
+<li>
+<p>Check 'Extract required libraries into generated JAR'.</p>
+</li>
+<li>
+<p>Click <em>Finish</em> and click <em>OK</em> in the next window prompts.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once we have the devcon.jar file we have two options depending if we are customizing a Devcon installed locally or the Devcon tool included with the Devon distributions (from version 2.1.1 onwards).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OPTION1: If you are working over a local installation of Devcon you only need to copy the <em>devcon.jar</em> you just created, to <code>C:\Users\{Your User}\.devcon</code> replacing the devcon.jar that is inside of that directory with your new <em>devcon.jar</em> (be aware that the directory <em>.devcon</em> may be placed in another drive like <em>D</em>).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you don&#8217;t have Devcon installed you can see how to install it <a href="#Download Devcon">here</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OPTION 2: In case you are working over the copy of Devcon enabled by default in Devon distributions you only need to copy the <em>devcon.jar</em> you just created, to <code>Devon-distribution\software\devcon</code> replacing the devcon.jar that is inside of that directory with your new <em>devcon.jar</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Once we have installed our customized version of Devcon we can open the Windows command line (for local Devcon installations) or <em>console.bat</em> script (for the Devcon included in Devon distributions) and type <code>devcon -g</code> or <code>devcon -h</code>. The first one will open the Devcon graphic user interface, the second one will show the Devcon basic info in the command line. In both cases we should see our new module as one of the available modules.</p>
+</div>
+<div class="paragraph">
+<p>In case of the <em>gui</em> option we will see</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-new-module.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-new-module.png" alt="devcon new module" width="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>And selecting the <em>extract</em> command we can see that the parameters we defined appear as mandatory parameters.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-new-module2.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-new-module2.png" alt="devcon new module2" width="450"></a>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you want to try the same but using the command line you can use the command <code>devcon file extract -h</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_using-our-module-and-command">Using our module and command</h4>
+<div class="paragraph">
+<p>Finally we want to use the <em>extract</em> command of our <em>file</em> module to extract a real zip file.</p>
+</div>
+<div class="paragraph">
+<p>We have a <em>myFile.zip</em> in <em>D:</em> and want to extract the files into <em>D:\Temp</em> directory</p>
+</div>
+<div class="paragraph">
+<p><strong>with the gui</strong></p>
+</div>
+<div class="paragraph">
+<p>We will need to provide both mandatory parameters and click <em>Start</em> button</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-using-custom-command-gui.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-using-custom-command-gui.png" alt="devcon using custom command gui" width="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>with the command line</strong></p>
+</div>
+<div class="paragraph">
+<p>We would obtain the same result using the command line</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">C:\&gt;devcon file extract -filepath D:\myFile.zip -targetpath D:\Temp
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+Extracting...
+file unzip : D:\Temp\myFile\file1.txt
+file unzip : D:\Temp\myFile\file2.txt
+file unzip : D:\Temp\myFile\file3.txt
+file unzip : D:\Temp\myFile\file4.txt
+Done
+
+C:\&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That&#8217;s all, with theese few steps, we have created and included a new customized module written in Java in the Devcon&#8217;s core.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="devcon-command-developers-guide.asciidoc_javascript-modules">Javascript modules</h3>
+<div class="paragraph">
+<p>As we mentioned at the beginning of this chapter Devcon allows to be extended with custom modules in an external way by adding modules written in Javascript.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You will need to have installed Java 8 to be able to run Javascript modules.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We have seen how to define the Devcon&#8217;s elements (modules, commands and parameters) and how to register them (using keywords) so let&#8217;s see how to add a new module to Devcon using Javascript.</p>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_module-structure">Module structure</h4>
+<div class="paragraph">
+<p>The Javascript modules must include two main files:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the <strong>commands.json</strong> file that contains the definition of the elements of the module (module metadata, commands and parameters).</p>
+</li>
+<li>
+<p>a Javascript file <strong>&lt;name of the module&gt;.js</strong> with the logic of the module.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_how-to-register-a-module">How to register a module</h4>
+<div class="paragraph">
+<p>To register a Javascript module we only need to create a directory with that two files and add it to the Devcon&#8217;s module engine. If you have installed Devcon locally you should add that directory in a <em>scripts</em> directory within the <code>C:\Users\{Your User}\.devcon</code> folder but if you are customizing the Devcon included by default in the Devon distributions (for versions 2.1.1 or higher) you should add the directory with the <em>json</em> and the <em>js</em> files in a <em>scripts</em> directory within the <code>Devon-dist\software\devon</code> folder (we will see it later in more detail).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_module-definition">Module definition</h4>
+<div class="paragraph">
+<p>The <em>commands.json</em> file located in the Javascript module folder defines the elements included in it, from the module details, as name or description, to the commands and its parameters.</p>
+</div>
+<div class="paragraph">
+<p>If you have followed the <a href="#devcon-command-developers-guide.asciidoc_creating-a-java-module">Creating a Java module</a> section you have seen that for the Java modules we use the <em>@CmdModuleRegistry</em> annotation to register a module. In the case of the Javascript modules this is replaced by the <em>commands.json</em> file itself so we won&#8217;t have an equivalent <em>module registry</em> keyword.</p>
+</div>
+<div class="paragraph">
+<p>To define the module in the <em>commands.json</em> file we can use the following attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>name</em>: for the module name.</p>
+</li>
+<li>
+<p><em>description</em>: for the module description that will be shown to the users.</p>
+</li>
+<li>
+<p><em>visible</em>: <em>true</em>/<em>false</em> attribute. Allows to hide modules in case we don&#8217;t want them to be available.</p>
+</li>
+<li>
+<p><em>sort</em>: to sort modules, if sort &gt;=0, it will be sorted by descending value. Modules which have value &lt;1 will be omitted from numeric sort and will be sorted alphabetically. This modules will be appended to the modules which are sorted numerically.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An example for a <em>commands.json</em> might look like</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{
+    "name": "myJSmodule",
+    "description": "this is an example of a Devcon Javascript module",
+    "visible": true,
+    "sort": -1,
+
+...
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_command-definition">Command definition</h4>
+<div class="paragraph">
+<p>Also in the <em>commands.json</em> file we will define the commands of the module and its parameters.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>We will use a <strong>commands</strong> array to enumerate all the commands of a module. Each command will be defined with the following attributes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>name</em>: for the command name.</p>
+</li>
+<li>
+<p><em>path</em>: path to the <em>js</em> file that contains the logic of the module. If this is located in the same folder than the <em>commands.json</em> file we can provide only the name of the file, without the path.</p>
+</li>
+<li>
+<p><em>description</em>: for the command description that will be shown to the users.</p>
+</li>
+<li>
+<p><em>context</em>: the context in which the command is expected to be launched regarding a project. E.g. the <em>run</em> command of the <em>devon4j</em> module needs to be launched within the context of an <em>devon4j</em> project. The options to define the context are:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>NONE</em>: if the command doesn&#8217;t need to be launched within a project context.</p>
+</li>
+<li>
+<p><em>PROJECT</em>: if the command is expected to be launched within a project (devon4j, devon4js or Sencha). In theese cases this context definition will automatically provide a default <em>path</em> parameter to the command parameters alongside some extra project info (see the <em>devon4j run</em> implementation.).</p>
+</li>
+<li>
+<p><em>COMBINEDPROJECT</em>: if the command needs to be launched within a combined (server &amp; client) project.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><em>proxyParams</em>: in case your command needs to configure a proxy, this attribute will inject automatically a <em>host</em> and <em>port</em> parameters as part of the parameters of your command.</p>
+</li>
+<li>
+<p><em>sort</em>: see the <em>sort</em> attribute in the previous section.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{
+    "name": "myJSmodule",
+    "description": "this is an example of a Devcon Javascript module",
+    "visible": true,
+    "sort": -1,
+	"commands": [{
+		"name": "myFirstCommand",
+		"path": "myFirstCommand.js",
+		"description": "this is my first js command",
+		"context": "NONE",
+		"proxyParams": false,
+		...
+	}]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_parameter-definition">Parameter definition</h4>
+<div class="paragraph">
+<p>As part of the <em>command</em> object in the <em>commands.json</em> file we can define the parameters using the following structure of attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>parameters</strong> array to group the command parameters. For each parameter we will define the following attributes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>name</em>: the name for the parameter.</p>
+</li>
+<li>
+<p><em>description</em>: the description of the parameter to be shown to the users.</p>
+</li>
+<li>
+<p><em>optional</em>: a <em>true</em>/<em>false</em> attribute to define if the parameter is mandatory or not.</p>
+</li>
+<li>
+<p><em>sort</em>: see the <em>sort</em> attribute in the previous section.</p>
+</li>
+<li>
+<p><em>inputType</em>: by default the parameters will be represented in the Devcon&#8217;s graphic user interface as text boxes but, in case we want the parameter to be a drop down list, a directory picker or a password box, we can specify it using this <em>inputType</em> attribute and defining some sub-attributes</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>drop down list</em>: <code>"inputType": {"name":"list", "values":["optionA", "optionB", "optionC"]}</code></p>
+</li>
+<li>
+<p><em>directory picker</em>: <code>"inputType": {"name":"path", "values":[]}</code></p>
+</li>
+<li>
+<p><em>password box</em>: <code>"inputType": {"name":"password", "values":[]}</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In our example we are going to add two parameters, a first one that will be showed as a text box and the second one that will be a drop down with four options. The result will look like the following</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{
+    "name": "myJSmodule",
+    "description": "this is an example of a Devcon Javascript module",
+    "visible": true,
+    "sort": -1,
+	"commands": [{
+		"name": "myFirstCommand",
+		"path": "myFirstCommand.js",
+		"description": "this is my first js command",
+		"context": "NONE",
+		"proxyParams": false,
+		"parameters": [
+			{
+			"name": "firstParameter",
+			"description": "this is my first parameter",
+			"optional": false,
+			"sort": -1
+			},
+			{
+			"name": "secondParameter",
+                        "description": "this is my second parameter",
+                        "optional":true,
+                        "sort": -1,
+			"inputType" : {"name":"list", "values":["devonfw", "devon4j", "cobigen", "devcon"]}
+			}
+		]
+	}],
+
+...
+
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_the-commands">The commands</h4>
+<div class="paragraph">
+<p>Each command will be defined in a separate Javascript file with a name that match the <code>path</code> attribute defined in the <code>commands.json</code> file of the module. Remember that in case that the js file is in the same directory than the <em>commands.json</em> file we only need to provide the name of the js file.</p>
+</div>
+<div class="paragraph">
+<p>The JavaScript file must have as content either a named or anonymous function which contains the command implementation. The parameters of the funcion contain the parameters in the defined order and the <code>this</code> special property points to the Java <em>CommandModule</em> context.</p>
+</div>
+<div class="paragraph">
+<p>So returning to our example we will have a file called <code>myFirstCommand.js</code> located in the same directory than the <code>commands.json</code>.</p>
+</div>
+<div class="paragraph">
+<p>The content will be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="javascript language-javascript">function (firstParameter, secondParameter){
+
+	// Here the content of your module.
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_creating-a-javascript-module">Creating a javascript module</h4>
+<div class="paragraph">
+<p><strong>Adding the module structure</strong></p>
+</div>
+<div class="paragraph">
+<p>We have already seen the structure of a Devcon&#8217;s Javascript module so let&#8217;s see how to create one with an example that contains all steps.</p>
+</div>
+<div class="paragraph">
+<p>In this case we are going to create (again) a command to extract a zip file, so we are going to create a module called <em>myJSmodule</em> with a command <em>extract</em> that gets two mandatory parameters <em>filepath</em> for the path to the zip file and a <em>targetpath</em> to define the location of the extracted files.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1. The <code>Devcon Directory</code> is</p>
+<div class="ulist">
+<ul>
+<li>
+<p>for local installations of Devcon: <code>C:\Users\{Your User}\.devcon</code> (if you don&#8217;t find the <code>.devcon</code> directory there try looking in <code>D:</code> drive, if the directory is not there neither check your Devcon&#8217;s installation).</p>
+</li>
+<li>
+<p>for the Devcon tool within the Devon distribution (version 2.1.1 or higher): <code>Devon-dist\software\devon</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title=""></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you want to customize a copy of Devcon in a local context and you still don&#8217;t have Devcon installed you can see how to download and install it <a href="#Download Devcon">here</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2. We will need to create the <em>scripts</em> folder within the <em>Devcon Directory</em>.</p>
+</li>
+<li>
+<p>3. Then we will need to create inside the <em>scripts</em> folder the directory for our new module and inside it we need to add</p>
+<div class="ulist">
+<ul>
+<li>
+<p>a <code>commands.json</code> file with the definition of the module</p>
+</li>
+<li>
+<p>and an <code>extract.js</code> file with the code for the <em>extract</em> command.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So we will end having a structure like <code>{Devcon Directory}\scripts\myModule</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-js-structure.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-js-structure.png" alt="devcon js structure" width="450"></a>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_defining-the-module-and-the-command">Defining the module and the command</h4>
+<div class="paragraph">
+<p>To define and register the module and the command we will use the <em>commands.json</em> file. First we will add the module metadata (name, description) and then the commands, and its parameters, inside the <em>commands</em> array.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="json language-json">{
+	"name": "myJSmodule",
+	"description": "test module",
+	"visible": true,
+	"sort": -1,
+	"commands": [
+	    {
+	    "name": "extract",
+	    "path": "extract.js",
+	    "description": "command to extract a file",
+	    "context": "NONE",
+	    "proxyParams": false,
+	    "parameters": [
+	         {
+		     "name": "filepath",
+		     "description": "path to the file to be extracted",
+		     "optional": false,
+		     "sort": -1
+		  },
+		  {
+		      "name": "targetpath",
+                      "description": "path to the folder to locate the extracted files",
+                      "optional":false,
+                      "sort": -1
+		   }
+		]
+	}
+      ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_adding-the-command-logic">Adding the command logic</h4>
+<div class="paragraph">
+<p>As we have previously mentioned we need to add the code of our command in the <em>extract.js</em> file. As we want to extract a file, to avoid a most complicated implementation, we are going to use the <em>unZip</em> method that belongs to the <em>utils</em> package of Devcon. To access to the method we will need to provide the fully qualified name <code>com.devonfw.devcon.common.utils.Extractor.unZip</code>.</p>
+</div>
+<div class="paragraph">
+<p>So in the <em>extract.js</em> file we must add a function that gets the two parameters defined in the <em>commands.json</em> (<em>filepath</em> and <em>targetpath</em>) and uses the Java method <em>unZip</em> to extract the file. Also remember that the special property <em>this</em> will give us access to the Devcon&#8217;s module context so we will be able to use the Devcon&#8217;s output (you can find the entire resources that <code>this</code> can provide <a href="https://github.com/devonfw/devcon/blob/develop/src/main/java/com/devonfw/devcon/common/impl/AbstractCommandModule.java">here</a>)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="javascript language-javascript">function(filepath, targetpath){
+	this.getOutput().showMessage("extracting...");
+	com.devonfw.devcon.common.utils.Extractor.unZip(filepath, targetpath);
+	this.getOutput().showMessage("Done!");
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="devcon-command-developers-guide.asciidoc_using-the-new-module-and-the-command">Using the new module and the command</h4>
+<div class="paragraph">
+<p>We have finished the implementation of the new Javascript module so now we can start using it.</p>
+</div>
+<div class="paragraph">
+<p>We have created a module to extract <em>zip</em> files so we are going to use a <em>myFile.zip</em> located in the <code>D:</code> drive and we are going to extract it to the <code>D:\Temp</code> directory using our new module.</p>
+</div>
+<div class="paragraph">
+<p>As you may know if you have followed the Devcon&#8217;s documentation we can use the tool in two ways: using the command line or using the Devcon&#8217;s graphic user interface (GUI).</p>
+</div>
+<div class="paragraph">
+<p><strong>using the gui</strong></p>
+</div>
+<div class="paragraph">
+<p>To launch Devcon&#8217;s GUI we must open a command line and use the <code>devon -g</code> command. After that the Devon main window should be opened and we should see our new <code>myJSmodule</code> in the list of available modules. Then if we click over the module we should see the <code>extract</code> command available.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-new-js-module.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-new-js-module.png" alt="devcon new js module" width="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Then if we click over the <code>extract</code> command we should see a window with the name and description we provided in the <code>commands.json</code> alongside the parameters that we defined (<em>filepath</em> and <em>targetpath</em>), both mandatory.</p>
+</div>
+<div class="paragraph">
+<p>If we provide the parameters and click on the <em>Start</em> button the command should be launched and the file should be extracted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="images/devcon/devcon-using-custom-js-command-gui.png"><img src="/home/runner/work/devonfw-official-website/devonfw-official-website/target/generated-docs/images/devcon/devcon-using-custom-js-command-gui.png" alt="devcon using custom js command gui" width="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>We have extracted the file successfully using our just created Devcon command.</p>
+</div>
+<div class="paragraph">
+<p><strong>using the command line</strong></p>
+</div>
+<div class="paragraph">
+<p>If we use the command line the result will be exactly the same.</p>
+</div>
+<div class="paragraph">
+<p>Open a Windows command line (for local Devcon installations) or <em>command.line</em> script (for the Devcon included in Devon distributions) and launch the <code>devcon</code> command (<code>devon</code> or <code>devcon -h</code> will also work)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">...&gt;devon
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+usage: devon &lt;&lt;module&gt;&gt; &lt;&lt;command&gt;&gt; [parameters...] [-g] [-h] [-p] [-s] [-v]
+Devcon is a command line tool that provides many automated tasks around the full
+ life-cycle of Devon applications.
+ -g,--gui         show devcon GUI
+ -h,--help        show help info for each module/command
+ -p,--prompt      prompt user for parameters
+ -s,--stacktrace  show (if relevant) stack-trace when errors occur
+ -v,--version     show devcon version
+List of available modules:
+&gt; dist: Module with general tasks related to the distribution itself
+&gt; doc: Module with tasks related with obtaining specific documentation
+&gt; file: custom devcon module
+&gt; github: Module to get Github repositories related to devonfw.
+&gt; help: This module shows help info about devcon
+&gt; myJSmodule: test module
+&gt; devon4j: devon4j(server project) related commands
+&gt; oasp4js: Module to automate tasks related to oasp4js
+&gt; project: Module to automate tasks related to the devon projects (server + client)
+&gt; sencha: Commands related with Ext JS6/Devon4Sencha projects
+&gt; system: Devcon and system-wide commands
+&gt; workspace: Module to create a new workspace with all default configuration</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the list of available modules you should see our <code>myJSmodule</code>.</p>
+</div>
+<div class="paragraph">
+<p>Now if we ask for the <code>myJSmodule</code> information with the command <code>devcon myJSmodule -h</code> we can check that our <code>extract</code> command is available. Also we can see the needed parameters using the <code>devcon myJSmodule extract -h</code> command</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">...&gt;devcon myJSmodule extract -h
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+usage: myJSmodule extract [-filepath] [-targetpath]
+command to extract a file
+ -filepath    path to the file to be extracted
+ -targetpath  path to the folder to locate the extracted files</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally we can use the <em>extract</em> command providing both mandatory parameters</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="batch language-batch">...&gt;devcon myJSmodule extract -filepath D:\myFile.zip -targetpath D:\Temp
+Hello, this is Devcon!
+Copyright (c) 2016 Capgemini
+extracting...
+file unzip : D:\Temp\myFile\file1.txt
+file unzip : D:\Temp\myFile\file2.txt
+file unzip : D:\Temp\myFile\file3.txt
+file unzip : D:\Temp\myFile\file4.txt
+Done!</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="devcon-command-developers-guide.asciidoc_conclusion">Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we have seen how easy can be to extend Devcon with new modules. You can either choose to add a Java module into the core of Devcon or achieve the same in an external way creating your own modules with Javascript (remember that you will need Java 8 to run your Javascript modules).</p>
+</div>
+<div class="paragraph">
+<p>Thanks to the Devcon&#8217;s structure, in both cases the work is reduced to, first, register the modules and then define each of its elements (commands and parameters) and the modules engine of Devcon will do the rest.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer" class="footer">
+<div class="openblock footerLinks">
+<div class="content">
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">About</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">About Defonfw</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Content Marketing</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Features</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Customer References</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Stack technology</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">Explore</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">Getting started</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Architecture</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Resources</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Tutorials</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Videos &amp; Photos</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">Docs</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">User guide</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Releases information</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Tutorials &amp; examples</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Wiki</a></p>
+</li>
+<li>
+<p><a href="#/index.html">FAQ</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="dlist linklist">
+<dl>
+<dt class="hdlist1">Community</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#/index.html">Events</a></p>
+</li>
+<li>
+<p><a href="#/index.html">News</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Contributors</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Yammer channel</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Wiki</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="ulist footerFooter">
+<ul>
+<li>
+<p><a href="#/index.html">Terms</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Privacy</a></p>
+</li>
+<li>
+<p><a href="#/index.html">License</a></p>
+</li>
+<li>
+<p><a href="#/index.html">Support</a></p>
+</li>
+</ul>
+</div>
+</div>
+    <script type="module">
+      import { UtilsModule } from '/website/shared/utils.js';
+      import { HeaderModule } from '/website/components/header/header.js';
+
+      let searchData = { index: null, documents: null };
+      UtilsModule.loadIndex(searchData);
+
+      $(window).on('load', function() {
+        const queryFun = () => {
+          HeaderModule.queryFunction(searchData);
+        };
+
+        HeaderModule.searchOnClick(queryFun);
+      });
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+Last updated 2019-10-21 12:07:59 UTC
+</div>
+</div>
+</body>
+</html>
